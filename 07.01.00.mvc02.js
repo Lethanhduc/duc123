@@ -242,7 +242,7 @@ async function runInsert(NameTable , newRec) {
 ///// Gọi hàm Insert !!!
 runInsert("Order" ,  
         {
-            _id : new mongoose.mongo.ObjectId(),
+            _id : new mongosee.mongo.ObjectId(),
             StaffID : "vusername",
             ItemsList : "dssp",
             Total : 0
