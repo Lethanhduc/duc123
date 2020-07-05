@@ -1,23 +1,72 @@
 <%- include('partials/header') -%>
 
-<div class="navbar">
-    <a href="/">Home</a>
-    <a href="/products">Products</a>
-    <a href="/order">Order</a>
-    <a href="/login" class="right">Login</a>
-  </div>
+
+<!DOCTYPE html>
+<html>
+<header>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+    .parallax {
+  /* The image used */
   
-<HR>
-    <div class="alert alert-warning">
-      <H1>TẠO HÓA ĐƠN BÁN HÀNG</H1>
-    </div>
-<HR>
+
+  /* Set a specific height */
+  width:100%;
+  position: relative;
+    top: 0;
+    bottom: 0;
+  height: 30px; 
+  text-align: center;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+a:link {
+  color: rgb(156, 113, 113);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: rgb(156, 113, 113);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(170, 151, 90);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:active {
+  color: rgb(170, 151, 90);
+  background-color: transparent;
+  text-decoration: none;
+}
+div.a {
+  text-align: center;
+}
+        </style>
+</header>
+<!--head-->
+<head>
+        <br><br><img src="https://seeklogo.com/images/A/ATN-logo-0FCFF3C433-seeklogo.com.gif" class="center" style="width:165px;height:120px;">
+        <p><a href="/"><div class="a">Home</a>
+            <a href="/login">Login</a>
+            <a href="/products">Product</a>
+            <a href="/order">Order</div></a></p>
 
 
     <div class="row">
         <div class="col-sm-8">
             <div class="row">
-                <H1>Các sản phẩm</H1>
+                <H1>Product</H1>
             </div>
             
                 <div class="row">
@@ -34,7 +83,7 @@
 								
 								<p><b>Information: </b></p>                                
                                 <p><%= productlist[i].Information%> </p>
-								<button type="button" class="btn btn-success" onclick="themvao('<%= productlist[i]._id %>', '<%= productlist[i].Name %>', '<%= productlist[i].Price%>' )">Thêm vào</button>
+								<button type="button" class="btn btn-success" onclick="themvao('<%= productlist[i]._id %>', '<%= productlist[i].Name %>', '<%= productlist[i].Price%>' )">ADD</button>
 							</td>
 						</tr>
                     <% } %>
@@ -48,7 +97,7 @@
 
         <div class="col-sm-4">
             <div class="row">
-                <H1>GIỎ hàng</H1>
+                <H1>Cart</H1>
             </div>
             <div class="row" id="giohang">
                 <table width="100%" id="giohangTab" style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
@@ -58,7 +107,7 @@
             
             <form action="/payment">
             <input  name="dssp" id="dssp" type="hidden" value="">
-            <button type="button" class="btn btn-success" onclick="submit()">Thanh toán</button>
+            <button type="button" class="btn btn-success" onclick="submit()">pay</button>
             </form>
         </div>        
       </div>
@@ -99,5 +148,3 @@
         ds.value = dsspmua;
     }
 </script>
-
-<%- include('partials/footer') -%>
