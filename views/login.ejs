@@ -1,17 +1,77 @@
 
-
+<!DOCTYPE html>
 <html>
-    <%- include('partials/header') -%>
+<header>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+    .parallax {
+  /* The image used */
+  
 
-    <body>
-        <H2> Login page </H2>
-        <form action="login">
-            <P>Username: <input type="text" name="username"></P>
-            <P>Password: <input type="password" name="password"></P>
-            <P><input type="submit" value="Login"></P>
-        </form>
-		<P> Msg: <%=mesg%> </P>
-
-        <%- include('partials/footer') -%>
-    </body>
-</html>
+  /* Set a specific height */
+  width:100%;
+  position: relative;
+    top: 0;
+    bottom: 0;
+  height: 30px; 
+  text-align: center;
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        
+a:link {
+  color: rgb(156, 113, 113);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: rgb(156, 113, 113);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(170, 151, 90);
+  background-color: transparent;
+  text-decoration: none;
+}
+a:active {
+  color: rgb(170, 151, 90);
+  background-color: transparent;
+  text-decoration: none;
+}
+div.a {
+  text-align: center;
+}
+        </style>
+</header>
+<!--head-->
+<head>
+        <br><br><img src="https://seeklogo.com/images/A/ATN-logo-0FCFF3C433-seeklogo.com.gif" class="center" style="width:165px;height:120px;">
+        <p><a href="/"><div class="a">Home</a>
+            <a href="/login">Login</a>
+            <a href="/products">Product</a>
+            <a href="/order">Order</div></a></p>
+<body>
+        <style>
+                body {
+                  background-image: url("https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&w=1000&q=80");
+                  Background-size:cover
+                }
+                </style>
+        <div style="text-align:center;">
+                <form action="login">
+                    <br><br><br><br><br><br>
+                    <P>Username: <input type="text" name="username"></P>
+                    <P>Password: <input type="password" name="password"></P>
+                    <P><input type="submit" value="Login"></P>
+                </form>
+               </div>
+</body>

@@ -5,7 +5,7 @@ var orderSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     StaffID: String,
     ItemsList: String,
-    Total: Number 
+    Total: String 
 } , { collection: 'order' } );
 var Order = mongoose.model('order', orderSchema);
 

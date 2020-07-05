@@ -1,5 +1,12 @@
 <%- include('partials/header') -%>
 
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/products">Products</a>
+    <a href="/order">Order</a>
+    <a href="/login" class="right">Login</a>
+  </div>
+  
 <HR>
     <div class="alert alert-warning">
       <H1>TẠO HÓA ĐƠN BÁN HÀNG</H1>
@@ -59,36 +66,27 @@
 <script>
     var dsspmua = "";
     var giohang = {};
-
     function addGioHang(xID, xName, xPrice) {
         var hangthem = giohang[xID];
-
         console.log(hangthem);
-
         if (hangthem) {
             hangthem["soluong"] += 1
         } else {
             hangthem = { "ten" : xName, "gia" : xPrice, "soluong" : 1};
         }
         giohang[xID] = hangthem;
-
         console.log(hangthem);
-
     }
-
     function themvao(xID, xName, xPrice) {
         //alert(xID + "  " + xName);
         var x = document.getElementById("giohangTab");
         var ds = document.getElementById("dssp");
-
         /// ADD
         addGioHang(xID, xName, xPrice);
-
         /// show list
         var xkeys = Object.keys(giohang);
         var showlist = "";
         dsspmua = "";
-
         for(j=0; j<xkeys.length; j++)
         {
             dsspmua += xkeys[j] + "_" + giohang[ xkeys[j] ]["soluong"] + "_";
@@ -97,13 +95,9 @@
                 + " </td> <td> "  + giohang[ xkeys[j] ]["soluong"] + " </td> <td> "
                 + giohang[ xkeys[j] ]["gia"] + " </td></tr>";
         };
-
-
         x.innerHTML = showlist;
         ds.value = dsspmua;
     }
-
-
 </script>
 
 <%- include('partials/footer') -%>
