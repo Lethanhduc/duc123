@@ -207,7 +207,7 @@ function viewPayment(request, response) {
 }
 runInsert("Order" ,  
         {
-            _id : new mongoose.mongo.ObjectId(),
+            _id : new mongosee.mongo.ObjectId(),
             StaffID : "",
             ItemsList : "",
             Total : 0
