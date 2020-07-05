@@ -180,6 +180,10 @@ function viewProduct(request, response) {
 /// ***************** ***************** *****************
 app.get('/order', viewOrder);
 function viewOrder(request, response) {
+    if (typeof (request.session.login_user) == "undefined")
+    {
+        response.redirect("/login");
+    }
     responseDB(response, "order",
 				Product, {}, { username : request.session.login_user }, "productlist");
 }
@@ -208,9 +212,9 @@ function viewPayment(request, response) {
 runInsert("Order" ,  
         {
             _id : new mongosee.mongo.ObjectId(),
-            StaffID : "",
-            ItemsList : "",
-            Total : 0
+            StaffID : "1",
+            ItemsList : "4",
+            Total : 4
         }
     );
 
