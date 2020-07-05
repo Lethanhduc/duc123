@@ -49,7 +49,7 @@ const uri = "mongodb+srv://saint_nero:0906732352@cluster0-oiehc.mongodb.net/Clou
 
 /// ***************** ***************** *****************
 /// ***************** Database & Bảng dữ liệu cần Truy vấn
-const NameDataBase =  "ClouDB"; // "CloudDB";
+const NameDataBase =  "CloudDB"; // "CloudDB";
 var xflag = 0;
 var vResult = [];
 var accLogin = null;
@@ -76,11 +76,10 @@ async function runQuery(NameTable , vQuery) {
 
 /// *****************
 async function readDB() {
-    const inf = await runQuery( "Products" , {} );
+    const inf = await runQuery( "Product" , {} );
     vResult = inf;
     xflag = 1;
 }
-
 
 /// ***************** 
 async function responseDB(response, xview, xModel, xQuery, xparams, xtag, xNext="error") {
@@ -98,15 +97,32 @@ async function responseDB(response, xview, xModel, xQuery, xparams, xtag, xNext=
         if (kq) {
             xparams[xtag] = kq;            
             console.log(xview + "\t THanh cong !");
+            console.log(kq);
             response.render(xview, xparams);
         } else {
-            response.render(xNext, { mesg : "... KO co Data DB ! "} );
+            response.render(xNext, { mesg : "... No database ! "} );
         }
     } else {
-        response.send("ko thanh cong !");
+        response.send("Fail to login !");
         //response.redirect('/login');
     }
 
+}
+
+/// ***************** 
+async function runInsert(NameTable , newRec) {
+	
+	const xdbo = await MongoClient.connect(
+		uri, 
+		{ useNewUrlParser: true , useUnifiedTopology: true }
+    );    
+    const dbo = xdbo.db(NameDataBase);
+    
+	////// Run - Query
+	const results = await dbo.collection(NameTable).insertOne(newRec);
+
+    console.log(results);
+	return results;
 }
 
 
@@ -181,20 +197,34 @@ function viewPayment(request, response) {
     listsp = [];
     for (i=0; i< listkq.length / 2; i++) {
         listsp.push(
-            { Name : "Tivi " + listkq[i*2], Price : 30000, Num: listkq[i*2+1]},
+            { Name : " " + listkq[i*2], Price : "30000", Num: listkq[i*2+1]},
         );
     }
     
 
     response.render("payment", { username : request.session.login_user , productlist : listsp });
+    
 }
-
+runInsert("Order" ,  
+        {
+            _id : new mongoose.mongo.ObjectId(),
+            StaffID : "",
+            ItemsList : "",
+            Total : 0
+        }
+    );
 
 
 /// ***************** ***************** *****************
 app.get('/report', viewReport);
-function viewReport(request, response) {
-    response.send("Web - REPORT page !");
+async function viewReport(request, response) {
+    if (typeof (request.session.login_user) == "undefined")
+    {
+        response.redirect("/login");
+    }
+    runInsert(response, "report",
+    Report, {}, { username : request.session.login_user }, "report");
+    response.render("reportfile");
 }
 
 
@@ -207,31 +237,16 @@ function viewProfile(request, response) {
     Staff, { MSNV : strMS}, {}, "stafflist");
 }
 
-/// ***************** ***************** *****************
-async function runInsert(NameTable , newRec) {
-	
-	const xdbo = await MongoClient.connect(
-		uri, 
-		{ useNewUrlParser: true , useUnifiedTopology: true }
-    );    
-    const dbo = xdbo.db(NameDataBase);
-    
-	////// Run - Query
-	const results = await dbo.collection(NameTable).insertOne(newRec);
 
-    console.log(results);
-	return results;
+/// ***************** ***************** *****************
+app.get(/.*\.nntu$/, viewSecret);
+function viewSecret(request, response) {
+    response.send("Web - Secret page ! " + request.url);
 }
-///// Gọi hàm Insert !!!
-runInsert("order" ,  
-        {
-            _id : new mongosee.mongo.ObjectId(),
-            StaffID : "1",
-            ItemsList : "dssp",
-            Total : 0
-        }
-    );
+
 /// ***************** ***************** *****************
 /// ***************** ***************** *****************
-/// ***************** ***************** **************** *
-app.listen(PORT, () => console.log(`\n\tWeb app listening at http://localhost:${PORT}`));
+/// ***************** ***************** *****************
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});

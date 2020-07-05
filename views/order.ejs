@@ -1,118 +1,61 @@
 <%- include('partials/header') -%>
-
-
-<!DOCTYPE html>
-<html>
-<header>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
-<style>
-    .parallax {
-  /* The image used */
-  
-
-  /* Set a specific height */
-  width:100%;
-  position: relative;
-    top: 0;
-    bottom: 0;
-  height: 30px; 
-  text-align: center;
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-}
-        img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        
-a:link {
-  color: rgb(156, 113, 113);
-  background-color: transparent;
-  text-decoration: none;
-}
-a:visited {
-  color: rgb(156, 113, 113);
-  background-color: transparent;
-  text-decoration: none;
-}
-a:hover {
-  color: rgb(170, 151, 90);
-  background-color: transparent;
-  text-decoration: none;
-}
-a:active {
-  color: rgb(170, 151, 90);
-  background-color: transparent;
-  text-decoration: none;
-}
-div.a {
-  text-align: center;
-}
-        </style>
-</header>
-<!--head-->
-<head>
-        <br><br><img src="https://seeklogo.com/images/A/ATN-logo-0FCFF3C433-seeklogo.com.gif" class="center" style="width:165px;height:120px;">
-        <p><a href="/"><div class="a">Home</a>
-            <a href="/login">Login</a>
-            <a href="/products">Product</a>
-            <a href="/order">Order</div></a></p>
-
-
-    <div class="row">
-        <div class="col-sm-8">
-            <div class="row">
-                <H1>Product</H1>
-            </div>
-            
-                <div class="row">
-				<table width = "100%">
-                <% for (var i = 0; i < productlist.length; i++) { %>
-						<tr style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
-							<td>
-								<img width="300px" height="230px" src="/images/<%= productlist[i].urlImg%>">
-							</td>
-							<td > 
-								<H3><%= productlist[i].Name %></H3>
-                                <p><b>Price: </b>
-                                <%= productlist[i].Price%> / <%= productlist[i].Unit%> </p>
-								
-								<p><b>Information: </b></p>                                
-                                <p><%= productlist[i].Information%> </p>
-								<button type="button" class="btn btn-success" onclick="themvao('<%= productlist[i]._id %>', '<%= productlist[i].Name %>', '<%= productlist[i].Price%>' )">ADD</button>
-							</td>
-						</tr>
-                    <% } %>
-					
-				</table>
-				</div>
-					
-
-            
-        </div>
-
-        <div class="col-sm-4">
-            <div class="row">
-                <H1>Cart</H1>
-            </div>
-            <div class="row" id="giohang">
-                <table width="100%" id="giohangTab" style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
-				
-				</table>
-            </div>
-            
-            <form action="/payment">
-            <input  name="dssp" id="dssp" type="hidden" value="">
-            <button type="button" class="btn btn-success" onclick="submit()">pay</button>
-            </form>
-        </div>        
-      </div>
-
-<script>
+  <header>
+      <nav>
+          <div class="content-nav">
+          </div>
+          </nav>
+          </header>
+          <body>              
+                  <div class="row">
+                      <div class="col-sm-8">
+                          <div class="row">
+                          </div>
+                          
+                              <div class="row">
+                                <table width = "100%">
+                                    <% for (var i = 0; i < productlist.length; i++) { %>
+                                            <tr style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
+                                                <td>
+                                                    <img width="300px" height="230px" src="/images/<%= productlist[i].urlImg%>">
+                                                </td>
+                                          <td > 
+                                              <H3><%= productlist[i].Name %></H3>
+                                              <p><b>Price: </b>
+                                              <%= productlist[i].Price%> 
+                                              <p><b>Unit: </b>
+                                              <%= productlist[i].Unit%> </p>
+                                              
+                                              <p><b>Information: </b></p>                                
+                                              <p><%= productlist[i].Information%> </p>
+                                              <button style="color: green;" type="button" class="btn btn-success" onclick="themvao('<%= productlist[i]._id %>', '<%= productlist[i].Name %>', '<%= productlist[i].Price%>' )">add</button>
+                                          </td>
+                                      </tr>
+                                  <% } %>
+                                  
+                              </table>
+                              </div>
+                                  
+              
+                          
+                      </div>
+              
+                      <div class="col-sm-4">
+                          <div class="row">
+                              <H3>Cart</H3>
+                          </div>
+                          <div class="row" id="giohang">
+                            <table width="100%" id="giohangTab" style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
+                            
+                            </table>
+                          </div>
+                          
+                          <form action="/payment">
+                          <input  name="dssp" id="dssp" type="hidden" value="">
+                          <button style="color:green" type="button" class="btn btn-success" onclick="submit()">pay</button>
+                          </form>
+                      </div>        
+                    </div>
+                    <script>
     var dsspmua = "";
     var giohang = {};
     function addGioHang(xID, xName, xPrice) {
@@ -148,3 +91,6 @@ div.a {
         ds.value = dsspmua;
     }
 </script>
+
+<%- include('partials/footer') -%>
+                  

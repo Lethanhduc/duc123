@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-var staffSchema = mongoose.Schema({
+var StaffSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     MSNV: String,
     Name: String,
     urlImg: String,
     Information: String    
-} , { collection: 'Staff' } );
+} , { collection: 'staff' } );
 
-var Staff = mongoose.model('Staff', staffSchema);
+var Staff = mongoose.model('staff', StaffSchema);
 
 module.exports = Staff;
